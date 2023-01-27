@@ -1,21 +1,22 @@
 const nodemailer = require('nodemailer');
 const handlebars = require("handlebars");
 const path = require("path");
+require("dotenv/config");
 
 const fs = require('fs');
 inlineCss = require('inline-css');
 
 const emailValidator = require('deep-email-validator');
 
-const frontURL = "https://garage-eight.vercel.app";
+const frontURL = process.env.FRONT_URL;
 
 
 // Create and initialize the email transport object
 const transporter = nodemailer.createTransport({
   service:"Gmail",
   auth: {
-    user: "etechorion@gmail.com",
-    pass: "fmloznfqzwjbqtqf"
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAI_SECRET
   }
 });
 
@@ -34,8 +35,8 @@ exports.sendEmailReparation = async (req, res) => {
     const templateRendered = templateCompiled({ user: req.body.user, marque: req.body.marque, imm: req.params.imm });
 
     const emailData = {
-      to: "receiver@example.com",
-      from: '"Example" sender@example.com',
+      to: req.body.user.email,
+      from: process.env.GMAIL_USER ,
       subject: "Réparation de la voiture " + req.body.marque + ", imm: " + req.params.imm,
       html: templateRendered
     };
@@ -57,7 +58,7 @@ exports.sendEmailReparation = async (req, res) => {
 exports.sendConfirmationEmail = (name, email, confirmationCode) => {
   console.log("Check");
   transporter.sendMail({
-    from: 'c363cd7b0f371c',
+    from: process.env.GMAIL_USER,
     to: email,
     subject: "Please confirm your account",
     html: `<h1>Email Confirmation</h1>
