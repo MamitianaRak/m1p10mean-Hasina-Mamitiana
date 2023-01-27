@@ -19,7 +19,7 @@ export class FinanceComponent {
     this.authService.logout().subscribe({
       next: res => {
         console.log(res);
-        const role = this.storageService.getUser().role;
+        const role = this.storageService.decrypt(this.storageService.getUser().role);
         this.storageService.clean();
         document.getElementById("ModalClose")?.click();
         if(role == "client"){
