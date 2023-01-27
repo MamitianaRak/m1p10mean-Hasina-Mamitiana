@@ -6,7 +6,7 @@ require("dotenv/config");
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:4200",
+  origin: "https://garage-eight.vercel.app",
   credentials: true
 }));
 app.use(express.json());

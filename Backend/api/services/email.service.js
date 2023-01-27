@@ -7,7 +7,7 @@ inlineCss = require('inline-css');
 
 const emailValidator = require('deep-email-validator');
 
-const frontURL = "http://localhost:4200";
+const frontURL = "https://garage-eight.vercel.app";
 
 
 // Create and initialize the email transport object
