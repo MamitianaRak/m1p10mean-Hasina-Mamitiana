@@ -19,7 +19,7 @@ app.use(
   })
 );
 
-const db = require("./api/models");
+const db = require("./app/models");
 
 db.mongoose.set('strictQuery', false);
 db.mongoose
@@ -36,12 +36,12 @@ db.mongoose
   });
 
 // routes
-require('./api/routes/auth.routes')(app);
-const clientRouter = require("./api/routes/client.routes");
-const atelierRouter = require("./api/routes/atelier.routes");
-const financeRouter = require("./api/routes/finance.routes");
-const voitureRouter = require("./api/routes/voiture.routes");
-const composantRouter = require("./api/routes/composant.routes");
+require('./app/routes/auth.routes')(app);
+const clientRouter = require("./app/routes/client.routes");
+const atelierRouter = require("./app/routes/atelier.routes");
+const financeRouter = require("./app/routes/finance.routes");
+const voitureRouter = require("./app/routes/voiture.routes");
+const composantRouter = require("./app/routes/composant.routes");
 
 app.use("/client", clientRouter);
 app.use("/atelier", atelierRouter);
