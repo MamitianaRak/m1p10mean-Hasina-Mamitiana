@@ -36,7 +36,7 @@ exports.sendEmailReparation = async (req, res) => {
 
     const emailData = {
       to: req.body.user.email,
-      from: process.env.GMAIL_USER ,
+      from: process.env.GMAIL_USER,
       subject: "Réparation de la voiture " + req.body.marque + ", imm: " + req.params.imm,
       html: templateRendered
     };

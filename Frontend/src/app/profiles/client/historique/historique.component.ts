@@ -18,17 +18,29 @@ export class HistoriqueComponent {
   ajouter = false;
   imm!:string;
 
+  isLoading = true;
+  isSearch = false;
+  isNodata = false;
+
 constructor(private service:ReparationService,private route: ActivatedRoute){};
 
 ngOnInit(): void {
   this.imm = this.route.snapshot.paramMap.get("imm")!;
-   this.Ongetreparation();
+   this.Ongetreparation(false);
 }
 
-Ongetreparation(){
+Ongetreparation(search:boolean){
   if(this.keyword == null){
     this.service.gethistorique(this.imm,'',this.currentPage,this.pageSize).subscribe({
       next: (data) => {
+        if(!data){
+          this.isNodata =true;
+          this.isSearch =false;
+          if(search){
+            this.isSearch = true;
+          }
+        }
+        this.isLoading=false;
         this.reparations=data;
         if(data != null) {this.pages=new Array<number>(data.totalPages)}; 
       },
@@ -38,6 +50,14 @@ Ongetreparation(){
   }else{
     this.service.gethistorique(this.imm,this.keyword,this.currentPage,this.pageSize).subscribe({
       next: (data) => {
+        if(!data){
+          this.isNodata =true;
+          this.isSearch =false;
+          if(search){
+            this.isSearch = true;
+          }
+        }
+        this.isLoading=false;
         this.reparations=data;
         if(data != null) {this.pages=new Array<number>(data.totalPages)}; 
       },
@@ -49,15 +69,17 @@ Ongetreparation(){
 }
 
 onPageReparations(i:number) {
+  this.isLoading=true
  this.currentPage=i+1;
  console.log(this.keyword,this.currentPage,this.pageSize);
- this.Ongetreparation();
+ this.Ongetreparation(false);
  }
 
 onSearch(data:any) {
+  this.isLoading=true
 this.keyword=data.keyword;
 console.log(this.keyword,this.currentPage,this.pageSize);
-this.Ongetreparation();
+this.Ongetreparation(true);
 }
 
 }

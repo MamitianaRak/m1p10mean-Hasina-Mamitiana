@@ -1,6 +1,5 @@
 const db = require("../models");
 const service = require("../services/reparation.service");
-const serviceMail = require("../services/email.service");
 
 
 exports.getListVoituresReparation = async (req, res) => {

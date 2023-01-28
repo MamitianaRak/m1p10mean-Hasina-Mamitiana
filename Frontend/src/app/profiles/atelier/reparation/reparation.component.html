@@ -5,7 +5,7 @@
                 <h6 class="m-0 font-weight-bold text-primary text-center"> Liste des voitures en réparation</h6>
             </div>
             <div class="card-body">
-                <form #f="ngForm" (ngSubmit)="onSearch(f.value)">
+                <form *ngIf="isSearch || voitures" #f="ngForm" (ngSubmit)="onSearch(f.value)">
                     <div class="form-group">
                     <label>Immatriculation: </label>
                     <input class="ml-2" type="text" name="keyword" ngModel>
@@ -14,13 +14,18 @@
                         </button>
                     </div>
                 </form>
-                <div *ngIf="voitures == null">
+                <div class="d-sm-flex align-items-center justify-content-center">
+                    <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
+                        <span class="sr-only text-center ">Loading...</span>
+                    </div>
+                </div>
+                <div *ngIf="isNodata">
                     <br>
                     <div  class="alert alert-info text-center" role="alert">
                         Aucune voiture à réparer
                       </div>
                 </div>
-                <table *ngIf="voitures" class="table table-responsive-md table-responsive-sm  table-responsive-lg">
+                <table *ngIf="voitures && !isLoading" class="table table-responsive-md table-responsive-sm  table-responsive-lg">
                     <tr>
                         <th>Immatriculation</th><th>Marque</th><th>Email du client</th><th>Client</th><th>Avancement</th><th>Prix Total</th>
                     </tr>
@@ -44,7 +49,7 @@
 
                     </tr>
                     </table>
-                    <ul *ngIf="voitures" class="nav justify-content-center">
+                    <ul *ngIf="voitures && !isLoading" class="nav justify-content-center">
                     <li class="page-item" [ngClass]="((i+1)==currentPage)?'active':''" *ngFor="let page of pages; let i=index">
                     <a class="page-link btn btn-primary  ml-1" (click)="onPageVoitures(i)">{{i+1}}</a>
                     </li>

@@ -5,7 +5,7 @@
                 <h6 class="m-0 font-weight-bold text-primary text-center"> {{"Historique des réparations pour la voiture avec l\'immatriculation : "+imm}}</h6>
             </div>
             <div class="card-body">
-                <form #f="ngForm" (ngSubmit)="onSearch(f.value)">
+                <form *ngIf="isSearch || reparations" #f="ngForm" (ngSubmit)="onSearch(f.value)">
                     <div class="form-group">
                     <label>Date: </label>
                     <input class="ml-2" type="datetime-local" name="keyword" ngModel>
@@ -14,13 +14,18 @@
                         </button>
                     </div>
                 </form>
-                <div *ngIf="reparations == null">
+                <div class="d-sm-flex align-items-center justify-content-center">
+                    <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
+                        <span class="sr-only text-center ">Loading...</span>
+                    </div>
+                </div>
+                <div  *ngIf="isNodata">
                     <br>
                     <div  class="alert alert-info text-center" role="alert">
                         Aucune historique de réparation
                       </div>
                 </div>
-                <table *ngIf="reparations" class="table table-responsive-md table-responsive-sm  table-responsive-lg">
+                <table *ngIf="reparations && !isLoading" class="table table-responsive-md table-responsive-sm  table-responsive-lg">
                     <tr>
                         <th>Immatriculation</th><th>Marque</th><th>Date Entrée</th><th>Date Sortie</th><th>Prix Total</th>
                     </tr>
@@ -46,7 +51,7 @@
 
                     </tr>
                     </table>
-                    <ul *ngIf="reparations"  class="nav justify-content-center">
+                    <ul *ngIf="reparations && !isLoading"  class="nav justify-content-center">
                     <li class="page-item" [ngClass]="((i+1)==currentPage)?'active':''" *ngFor="let page of pages; let i=index">
                     <a class="page-link btn btn-primary  ml-1" (click)="onPageReparations(i)">{{i+1}}</a>
                     </li>

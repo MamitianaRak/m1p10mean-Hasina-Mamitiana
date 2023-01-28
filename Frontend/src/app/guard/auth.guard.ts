@@ -51,7 +51,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
           this.router.navigate(['/client/voiture']);
         }
         if(userRole == ""){
-          console.log("nuul ve");
           if(route.data['role'] == "atelier"){
             this.authService.logout().subscribe({
               next: res => {

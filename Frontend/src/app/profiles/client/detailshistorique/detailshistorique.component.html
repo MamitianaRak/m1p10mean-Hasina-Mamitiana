@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="d-sm-flex align-items-center justify-content-center">
+        <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
+            <span class="sr-only text-center ">Loading...</span>
+        </div>
+    </div>
     <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
         <div *ngIf="voiture" class="card shadow mb-4">
             <div class="card-header py-3">

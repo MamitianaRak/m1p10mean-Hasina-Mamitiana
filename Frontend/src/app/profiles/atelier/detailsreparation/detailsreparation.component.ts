@@ -18,6 +18,7 @@ export class DetailsreparationComponent implements OnInit {
   controlf!: Array<boolean>;
   controlf1!: Array<boolean>;
 
+  isLoading = true;
 
   constructor(private service:ReparationService,private route: ActivatedRoute,private router:Router){};
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class DetailsreparationComponent implements OnInit {
       next: (data) => {
         if(data.length == 0) this.router.navigateByUrl('/atelier/reparation');
         else {
+          this.isLoading=false;
           this.voiture=data[0];
           this.dateTemp =new Array(this.voiture!.reparation!.composants!.length).fill(null);
           this.dateTempf =new Array(this.voiture!.reparation!.composants!.length).fill(null);

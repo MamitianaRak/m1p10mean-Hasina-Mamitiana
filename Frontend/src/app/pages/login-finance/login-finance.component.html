@@ -15,53 +15,52 @@
                                     <h1 class="h4 text-gray-900 mb-4">Réparation-Auto</h1>
                                     <h2 class="h4 text-gray-900 mb-4">Finance</h2>
                                 </div>
-                                
+
                                 <form class="user" #f="ngForm" (ngSubmit)="onSubmit()">
                                     <div class="form-group">
-                                        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger text-center" role="alert">
-                                          {{ errorMessage }}
+                                        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger text-center"
+                                            role="alert">
+                                            {{ errorMessage }}
                                         </div>
-                                      </div>
+                                    </div>
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Enter Email Address..."
-                                            name="email"
-                                            [(ngModel)]="user.email"
-                                            required
-                                            #email="ngModel"
+                                            placeholder="Enter Email Address..." name="email" [(ngModel)]="user.email"
+                                            required #email="ngModel"
                                             [ngClass]="{ 'is-invalid': f.submitted && email.errors }">
-                                            <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
-                                                Email requis!
-                                            </div>
-                                
+                                        <div *ngIf="email.errors && f.submitted" class="invalid-feedback ml-3">
+                                            Email requis!
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password"
-                                            name="password"
-                                            [(ngModel)]="user.password"
-                                            required
-                                            #password="ngModel"
-                                            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-                                            >
-                                            <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
-                                                Mot de passe requis!
-                                            </div>
+                                            id="exampleInputPassword" placeholder="Password" name="password"
+                                            [(ngModel)]="user.password" required #password="ngModel"
+                                            [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+                                        <div *ngIf="password.errors && f.submitted" class="invalid-feedback ml-3">
+                                            Mot de passe requis!
+                                        </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div  *ngIf="!isLoading" class="form-group">
                                         <button class="btn btn-primary btn-user btn-block">
-                                          Login
+                                            <span>Connexion</span>
                                         </button>
                                       </div>
-                                   
+                                      <div *ngIf="isLoading" class="d-sm-flex align-items-center justify-content-center">
+                                        <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
+                                            <span class="sr-only text-center ">Loading...</span>
+                                        </div>
+                                    </div>
+
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a  routerLink="/login-atelier" class="small" >Se connecter en tant qu'Atelier</a>
+                                    <a routerLink="/login-atelier" class="small">Se connecter en tant qu'Atelier</a>
                                 </div>
                                 <div class="text-center">
-                                    <a routerLink="/login-client" class="small" >Se connecter en tant que Client</a>
+                                    <a routerLink="/login-client" class="small">Se connecter en tant que Client</a>
                                 </div>
                             </div>
                         </div>
@@ -74,4 +73,3 @@
     </div>
 
 </div>
-

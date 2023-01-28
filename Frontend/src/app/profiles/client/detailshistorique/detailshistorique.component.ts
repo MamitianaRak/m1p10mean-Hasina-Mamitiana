@@ -13,6 +13,8 @@ export class DetailshistoriqueComponent {
   voiture!:Reparation;
   imm!:string;
 
+  isLoading = true;
+
 
   constructor(private service:ReparationService,private route: ActivatedRoute,private router:Router){};
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class DetailshistoriqueComponent {
       next: (data) => {
         if(data.length == 0) this.router.navigate(['/voiture',this.voiture.immatriculation,'historique']);
         else {
+          this.isLoading=false;
           this.voiture=data[0];
           console.log(this.voiture);
         };

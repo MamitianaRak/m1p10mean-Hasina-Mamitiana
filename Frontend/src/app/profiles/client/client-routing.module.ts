@@ -4,6 +4,7 @@ import { AjoutVoitureComponent } from './ajout-voiture/ajout-voiture.component';
 import { ClientComponent } from './client.component';
 import { DepotComponent } from './depot/depot.component';
 import { DetailshistoriqueComponent } from './detailshistorique/detailshistorique.component';
+import { EtatPaiementComponent } from './etat-paiement/etat-paiement.component';
 import { FactureComponent } from './facture/facture.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { ListeVoitureComponent } from './liste-voiture/liste-voiture.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
         path: 'voiture/:imm/facture/:date',
         component: FactureComponent,
         title :'Voiture | Facture'
+      },
+      {
+        path: 'etat',
+        component: EtatPaiementComponent,
+        title: 'Etat de paiement'
       },
       {
         path: '',

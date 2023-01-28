@@ -1,0 +1,113 @@
+<div class=" card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Voiture dans l'atelier</h6>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="form-group">
+                <label for="carSelect">Sélectionnez une voiture</label>
+                <select class="form-control" id="carSelect" [(ngModel)]="immatriculation">
+                    <option></option>
+                    <option *ngFor="let i of listeVoiture">{{i.immatriculation}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Date de début</label>
+                <input type="date" class="form-control" id="startDate" [(ngModel)]="debut">
+            </div>
+            <div class="form-group">
+                <label for="endDate">Date de fin</label>
+                <input type="date" class="form-control" id="endDate" [(ngModel)]="fin">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="recherche()">Soumettre</button>
+        </div>
+    </div>
+</div>
+
+<div class=" card shadow mb-4" *ngIf="etat">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Voiture dans l'atelier</h6>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <h1 class="text-center text-primary">Etat de Paiement</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-primary">Informations sur le client</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ serviceStorage.getUser().nom}}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenom</th>
+                            <td>{{ serviceStorage.getUser().prenom}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ serviceStorage.getUser().email}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-primary">Informations sur la voiture</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Immatriculation</th>
+                            <td>{{voiture.immatriculation}}</td>
+                        </tr>
+                        <tr>
+                            <th>Marque</th>
+                            <td>{{voiture.marque}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date debut</th>
+                            <td>{{debut | date:' d MMMM y'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date fin</th>
+                            <td>{{fin | date:' d MMMM y'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <ng-container *ngFor="let reparation of listeReparation">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-primary">Entrée : {{reparation.dateEntree | date:' d MMMM y'}}</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-primary">Sortie : {{reparation.dateSortie | date:' d MMMM y'}}</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-primary">Main d'ouvre: Ar {{reparation.prixMo}}</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-primary">Prix Total: Ar {{reparation.prixTotal}}</h5>
+                    </div>
+                </div>
+                <table class="table" *ngFor="let composant of reparation.composants">
+                    <thead>
+                        <tr>
+                            <th>Composant : {{composant.nom}}</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let piece of composant.pieces">
+                            <td>{{piece.nom}}</td>
+                            <td>Ar {{piece.prix}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="text-primary">Total des réparations: Ar {{somme}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

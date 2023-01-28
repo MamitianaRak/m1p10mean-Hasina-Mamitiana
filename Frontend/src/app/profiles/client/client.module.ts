@@ -15,6 +15,7 @@ import { VoitureComponent } from './voiture/voiture.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { DetailshistoriqueComponent } from './detailshistorique/detailshistorique.component';
 import { FactureComponent } from './facture/facture.component';
+import { EtatPaiementComponent } from './etat-paiement/etat-paiement.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FactureComponent } from './facture/facture.component';
     HistoriqueComponent,
     DetailshistoriqueComponent,
     FactureComponent,
+    EtatPaiementComponent,
 
   ],
   imports: [

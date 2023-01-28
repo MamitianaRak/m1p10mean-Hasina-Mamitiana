@@ -19,16 +19,28 @@ export class PayementComponent implements OnInit {
    pages!:Array<number>;
    ajouter = false;
 
+   isLoading = true;
+   isSearch = false;
+   isNodata = false;
+
 constructor(private service:PayementService,private router:Router){};
 
 ngOnInit(): void {
-    this.OngetnonPayer();
+    this.OngetnonPayer(false);
     console.log(this.pages);
 }
 
-OngetnonPayer(){
+OngetnonPayer(search:boolean){
   this.service.getNonpayer(this.keyword1,this.keyword,this.currentPage,this.pageSize).subscribe({
     next: (data) => {
+      if(!data){
+        this.isNodata =true;
+        this.isSearch =false;
+        if(search){
+          this.isSearch = true;
+        }
+      }
+      this.isLoading=false;
       this.voitures=data;
       if(data != null) this.pages=new Array<number>(data.totalPages);
     },
@@ -37,21 +49,22 @@ OngetnonPayer(){
 }
 
   onPageVoitures(i:number) {
-   
+    this.isLoading=true;
     this.currentPage=i+1;
     console.log(this.keyword,this.currentPage,this.pageSize);
-    this.OngetnonPayer();
+    this.OngetnonPayer(false);
     }
 
   onSearch(data:any) {
-   
+  this.isLoading=true;
   this.keyword=data.keyword;
   this.keyword1=data.keyword1;
   console.log(this.keyword1,this.keyword,this.currentPage,this.pageSize);
-  this.OngetnonPayer();
+  this.OngetnonPayer(true);
   }
 
   validation(imm:any,index:any){
+    this.isLoading=true;
     console.log(imm);
     if(this.voitures.docs[index].reparation!.datePayement! < this.voitures.docs[index].reparation!.dateSortie!){
       return;
@@ -59,12 +72,11 @@ OngetnonPayer(){
     if(this.voitures.docs[index].reparation!.datePayement! == null){
       return;
     }
-
+    document.getElementById("btnclos"+index)?.click();
     this.service.payer(imm,this.voitures.docs[index].reparation?.datePayement).subscribe({
       next: (data) => {
         console.log(data);
-        document.getElementById("btnclos"+index)?.click();
-        this.OngetnonPayer();
+        this.OngetnonPayer(false);
         this.ajouter = true;
         setTimeout(() => {
           this.ajouter = false;

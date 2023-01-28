@@ -17,6 +17,7 @@ export class FactureComponent {
   voiture!:Reparation;
   imm!:string;
 
+  isLoading = true;
 
   constructor(private service:ReparationService,private route: ActivatedRoute,private router:Router){};
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class FactureComponent {
       next: (data) => {
         if(data.length == 0) this.router.navigate(['/voiture',this.route.snapshot.paramMap.get("imm")!,'historique']);
         else {
+          this.isLoading=false;
           this.voiture=data[0];
           this.imm = this.route.snapshot.paramMap.get("imm")!;
           console.log(this.voiture);

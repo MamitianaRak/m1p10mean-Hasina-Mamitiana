@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../../models/user';
 import{ GlobalConstants } from '../../common/global.constants';
-import { AES } from "crypto-js";
 
 
 @Injectable({
@@ -11,7 +10,6 @@ import { AES } from "crypto-js";
 })
 export class AuthService {
 
-  private code = 'garage-secret-jwt123';
 
   constructor(private http:HttpClient) { }
 
