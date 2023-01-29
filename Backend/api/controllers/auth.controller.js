@@ -21,13 +21,13 @@ exports.signup = (req, res) => {
     confirmationCode: token
   });
 
-    user.save((err, user) => {
+    user.save(async (err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
     res.send({ message: "l\'utilisateur a été enregistré!" });
-    serviceMail.sendConfirmationEmail(
+    await serviceMail.sendConfirmationEmail(
       req.body.prenom,
       req.body.email,
       token
