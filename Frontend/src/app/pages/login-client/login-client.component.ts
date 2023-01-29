@@ -27,7 +27,7 @@ export class LoginClientComponent {
 
   onSubmit(): void {
     if (this.user.email != null && this.user.password != null) {
-      console.log("tonga");
+      
       this.isLoading = true;
       this.authService.login(this.user, this.role).subscribe({
         next: data => {

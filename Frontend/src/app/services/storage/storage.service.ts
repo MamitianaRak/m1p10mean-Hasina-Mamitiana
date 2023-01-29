@@ -43,7 +43,6 @@ export class StorageService {
     const user = window.sessionStorage.getItem(USER_KEY);
     const role = JSON.parse(user!).role;
     const bytes  =  CryptoJS.AES.decrypt(role,this.code);
-    console.log(role,this.code,bytes.toString(CryptoJS.enc.Utf8));
     return  bytes.toString(CryptoJS.enc.Utf8);
   }
  

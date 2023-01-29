@@ -28,7 +28,7 @@ db.mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
+    
   })
   .catch(err => {
     console.error("Connection error", err);

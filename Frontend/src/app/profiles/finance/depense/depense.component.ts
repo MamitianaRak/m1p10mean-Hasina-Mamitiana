@@ -73,9 +73,9 @@ export class DepenseComponent implements OnInit {
     if (this.form.invalid) {
       return;
   }
-  console.log(value);
+  
     if(!this.isPiece){
-      console.log(value);
+      
       value.pieces = null;
       this.addDepense(value);
       this.submitted =false;
@@ -92,7 +92,7 @@ export class DepenseComponent implements OnInit {
         return;
       } 
       else{
-        //console.log(value);
+        //
          this.addDepense(value);
         this.prixV = false;
         this.submitted =false;
@@ -125,7 +125,7 @@ export class DepenseComponent implements OnInit {
         next: (data) => {
           this.listapieces = data;
         },
-        error: (err) => { console.log(err);},
+        error: (err) => { },
         
       }
 

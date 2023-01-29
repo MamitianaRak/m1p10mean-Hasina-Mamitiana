@@ -32,11 +32,11 @@ export class FactureComponent {
           this.isLoading=false;
           this.voiture=data[0];
           this.imm = this.route.snapshot.paramMap.get("imm")!;
-          console.log(this.voiture);
+          
         };
       },
       error: (err) => {
-        console.log(err);
+        
         this.router.navigate(['/voiture',this.route.snapshot.paramMap.get("imm")!,'historique']);
       },
     });

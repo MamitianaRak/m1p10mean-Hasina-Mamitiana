@@ -29,11 +29,11 @@ export class DetailshistoriqueComponent {
         else {
           this.isLoading=false;
           this.voiture=data[0];
-          console.log(this.voiture);
+          
         };
       },
       error: (err) => {
-        console.log(err);
+        
         this.router.navigate(['/voiture',this.voiture.immatriculation,'historique']);
       },
     });

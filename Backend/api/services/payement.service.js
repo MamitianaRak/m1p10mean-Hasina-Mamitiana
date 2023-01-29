@@ -13,7 +13,7 @@ exports.getListVoituresNonpayer = (keyword1,keyword) => {
 
 
 exports.payer = (req,res) => {
-   console.log(req.body);
+   
       db.voiture.updateOne({immatriculation : req.params.imm, "reparation.avancement" : 100,"reparation.datePayement" : null}, { $set: {"reparation.$.datePayement" : req.body.date}},function(err,updated){
         if(err){
            res.status(500).send(err);

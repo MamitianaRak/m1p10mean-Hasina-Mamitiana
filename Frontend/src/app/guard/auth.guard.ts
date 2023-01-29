@@ -58,7 +58,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
                 this.router.navigate(['/login-atelier']);
               },
               error: err => {
-                console.log(err);
+                
               }
             });
           }
@@ -70,7 +70,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
                 this.router.navigate(['/login-finance']);   
               },
               error: err => {
-                console.log(err);
+                
               }
             });
           }
@@ -82,7 +82,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
                 this.router.navigate(['/login-client']);   
               },
               error: err => {
-                console.log(err);
+                
               }
             });
       
@@ -101,7 +101,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
           this.router.navigate(['/login-atelier']);
         },
         error: err => {
-          console.log(err);
+          
         }
       });
     }
@@ -113,7 +113,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
           this.router.navigate(['/login-finance']);   
         },
         error: err => {
-          console.log(err);
+          
         }
       });
     }
@@ -125,7 +125,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
           this.router.navigate(['/login-client']);   
         },
         error: err => {
-          console.log(err);
+          
         }
       });
 

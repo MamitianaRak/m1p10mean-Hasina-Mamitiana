@@ -18,7 +18,7 @@ export class DetailsreparationComponent implements OnInit {
   control1!: Array<boolean>;
   controlf!: Array<boolean>;
   controlf1!: Array<boolean>;
-
+  controlDebut! :Array<boolean>;
   isLoading = true;
 
   constructor(private service:ReparationService,private route: ActivatedRoute,private router:Router){};
@@ -39,10 +39,11 @@ export class DetailsreparationComponent implements OnInit {
           this.control1 =new Array(this.voiture!.reparation!.composants!.length).fill(false);
           this.controlf =new Array(this.voiture!.reparation!.composants!.length).fill(false);
           this.controlf1 =new Array(this.voiture!.reparation!.composants!.length).fill(false);
+          this.controlDebut =new Array(this.voiture!.reparation!.composants!.length).fill(false);
         };
       },
       error: (err) => {
-        console.log(err);
+        
         this.router.navigateByUrl('/atelier/reparation');
       },
     });
@@ -52,6 +53,7 @@ export class DetailsreparationComponent implements OnInit {
     this.dateTemp[index] =  new Date(eventDate.target.value);
     this.control[index] = false;
     this.control1[index] = false;
+    this.controlDebut[index] = false;
   }
 
   changedf(eventDate: any,index:any) : void {
@@ -65,12 +67,13 @@ export class DetailsreparationComponent implements OnInit {
     if(this.dateTemp[index] != null && this.dateTemp[index]< new Date(this.voiture.depots!.dateDepot)){
       this.control1[index] = true;
     }
-    else{
-      this.voiture.reparation!.composants![index].dateDebut = this.dateTemp[index];
-    }
     if(this.dateTemp[index] == null) this.control[index] = true;
-    if(!this.control[index] && !this.control1[index] ){
-      console.log("gg be");
+    if(this.voiture.reparation?.dateEntree != null && new Date(this.voiture.reparation?.dateEntree) > this.dateTemp[index] ){
+      this.controlDebut[index] = true;
+    }
+
+    if(!this.control[index] && !this.control1[index] && !this.controlDebut[index]){
+      this.voiture.reparation!.composants![index].dateDebut = this.dateTemp[index];
       let dataupdate = {};
       if(this.calculavancement()==0){
         this.voiture.reparation!.dateEntree = this.voiture.reparation!.composants![index].dateDebut;
@@ -80,7 +83,7 @@ export class DetailsreparationComponent implements OnInit {
       }
       this.service.updateCompDateDeb(this.voiture.immatriculation,dataupdate).subscribe({
         next: (data) => {
-          console.log(data);
+          
         },
         error: (err) => {console.log(err)},
       });
@@ -90,22 +93,28 @@ export class DetailsreparationComponent implements OnInit {
 
   updateDateFin(index:any) {
     if(this.dateTempf[index] != null && this.dateTempf[index]<new Date(this.voiture.reparation!.composants![index].dateDebut!)){this.controlf1[index] = true;}
-    else{
-      this.voiture.reparation!.composants![index].dateFin = this.dateTempf[index];
-    }
     if(this.dateTempf[index] == null) this.controlf[index] = true;
      if(!this.controlf[index]  && !this.controlf1[index]){
+      this.voiture.reparation!.composants![index].dateFin = this.dateTempf[index];
       this.voiture.reparation!.avancement = this.calculavancement();
       let dataupdate = {};
       if(this.voiture.reparation!.avancement==100){
-        this.voiture.reparation!.dateSortie =  this.voiture.reparation!.composants![index].dateFin ;
-        dataupdate = {nom:this.voiture.reparation!.composants![index].nom,dateFin:this.voiture.reparation!.composants![index].dateFin,avancement:this.voiture.reparation!.avancement,dateSortie:this.voiture.reparation!.composants![index].dateFin,user:this.voiture.client,marque:this.voiture.marque};
+       const maxDateTemp = new Date(
+        Math.max(
+          ...(this.voiture.reparation!.composants!).map(element => {
+            return new Date(element.dateFin!).getTime();
+          }),
+        ),
+      );
+      const max: Date = maxDateTemp > this.voiture.reparation!.composants![index].dateFin! ? maxDateTemp : this.voiture.reparation!.composants![index].dateFin!;
+      this.voiture.reparation!.dateSortie =  max ;
+        dataupdate = {nom:this.voiture.reparation!.composants![index].nom,dateFin:this.voiture.reparation!.composants![index].dateFin,avancement:this.voiture.reparation!.avancement,dateSortie:max,user:this.voiture.client,marque:this.voiture.marque};
       }else{
         dataupdate = {nom:this.voiture.reparation!.composants![index].nom,dateFin:this.voiture.reparation!.composants![index].dateFin,avancement:this.voiture.reparation!.avancement};
       }
       this.service.updateCompDateFin(this.voiture.immatriculation,dataupdate).subscribe({
         next: (data) => {
-          console.log(data);
+          
         },
         error: (err) => {
            console.log(err)
@@ -150,7 +159,7 @@ export class DetailsreparationComponent implements OnInit {
     }
     this.service.updateCompDateFin(this.voiture.immatriculation,dataupdate).subscribe({
       next: (data) => {
-        console.log(data);
+        
       },
       error: (err) => {console.log(err)},
     });

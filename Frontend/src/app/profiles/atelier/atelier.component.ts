@@ -21,7 +21,7 @@ export class AtelierComponent implements OnInit {
   logout(): void {
     this.authService.logout().subscribe({
       next: res => {
-        console.log(res);
+        
         const role = this.storageService.decrypt(this.storageService.getUser().role);
         this.storageService.clean();
         document.getElementById("ModalClose")?.click();
@@ -36,7 +36,7 @@ export class AtelierComponent implements OnInit {
         }
       },
       error: err => {
-        console.log(err);
+        
       }
     });
   }

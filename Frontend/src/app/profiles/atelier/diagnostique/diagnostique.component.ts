@@ -65,7 +65,7 @@ export class DiagnostiqueComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log(event.container.data);
+      
       this.getComposant(event.container.data[0]);
       this.messageErreur = "";
     }
@@ -126,7 +126,7 @@ export class DiagnostiqueComponent implements OnInit {
           if (this.composantDiagnostique[i].pieces.length > 0) {
             for (let j = 0; j < this.composantDiagnostique[i].pieces.length; j++) {
               if (this.composantDiagnostique[i].pieces[j].nom === pieceAdd.nom) {
-                console.log(this.composantDiagnostique[i].pieces.length);
+                
                 this.composantDiagnostique[i].pieces.splice(j, 1);
                 if (this.composantDiagnostique[i].pieces == undefined) {
                   this.composantDiagnostique.splice(i, 1);
@@ -154,7 +154,7 @@ export class DiagnostiqueComponent implements OnInit {
       if (count == 0) {
         this.voitureService.diagnostique(this.immatriculation, this.composantDiagnostique).subscribe({
           next: (data: Voiture) => {
-            console.log(data);
+            
             this.immatriculation = "";
             this.messageSuccess = "Diagnostique validé.";
           }

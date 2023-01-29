@@ -35,7 +35,7 @@ export class InscriptionComponent implements OnInit {
     this.authService.register(nom,prenom, email, password,this.role).subscribe({
       next: data => {
         this. isnotLoading = true;
-        console.log(data);
+        
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },

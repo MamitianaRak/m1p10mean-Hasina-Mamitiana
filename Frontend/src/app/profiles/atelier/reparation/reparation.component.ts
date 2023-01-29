@@ -52,7 +52,7 @@ Ongetvoiture(search:boolean){
 onPageVoitures(i:number) {
   this.isLoading=true;
   this.currentPage=i+1;
-  console.log(this.keyword,this.currentPage,this.pageSize);
+  
   this.Ongetvoiture(false);
   }
 
@@ -60,7 +60,7 @@ onSearch(data:any) {
   this.isNodata =false;
   this.isLoading=true;
 this.keyword=data.keyword;
-console.log(this.keyword,this.currentPage,this.pageSize);
+
 this.Ongetvoiture(true);
 }
 

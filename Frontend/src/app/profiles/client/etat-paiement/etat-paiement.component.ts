@@ -32,7 +32,7 @@ export class EtatPaiementComponent implements OnInit {
   }
 
   recherche(): void {
-    console.log(this.debut);
+    
     if (this.immatriculation != "" && this.debut?.toString() != "" && this.fin?.toString() != "") {
       this.etat = true;
       for (let i = 0; i < this.listeVoiture.length; i++) {

@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.verifyUser(this.route.snapshot.paramMap.get("confirmationCode")).subscribe({
       next: (data) => {
-        console.log(data);
+        
       },
       error: (err) => {console.log(err)},
     })

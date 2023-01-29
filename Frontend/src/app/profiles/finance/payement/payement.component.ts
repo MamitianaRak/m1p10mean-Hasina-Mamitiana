@@ -27,7 +27,7 @@ constructor(private service:PayementService,private router:Router){};
 
 ngOnInit(): void {
     this.OngetnonPayer(false);
-    console.log(this.pages);
+    
 }
 
 OngetnonPayer(search:boolean){
@@ -54,7 +54,7 @@ OngetnonPayer(search:boolean){
   onPageVoitures(i:number) {
     this.isLoading=true;
     this.currentPage=i+1;
-    console.log(this.keyword,this.currentPage,this.pageSize);
+    
     this.OngetnonPayer(false);
     }
 
@@ -63,13 +63,13 @@ OngetnonPayer(search:boolean){
   this.isLoading=true;
   this.keyword=data.keyword;
   this.keyword1=data.keyword1;
-  console.log(this.keyword1,this.keyword,this.currentPage,this.pageSize);
+  
   this.OngetnonPayer(true);
   }
 
   validation(imm:any,index:any){
     this.isLoading=true;
-    console.log(imm);
+    
     if(this.voitures.docs[index].reparation!.datePayement! < this.voitures.docs[index].reparation!.dateSortie!){
       return;
     }
@@ -79,7 +79,7 @@ OngetnonPayer(search:boolean){
     document.getElementById("btnclos"+index)?.click();
     this.service.payer(imm,this.voitures.docs[index].reparation?.datePayement).subscribe({
       next: (data) => {
-        console.log(data);
+        
         this.OngetnonPayer(false);
         this.ajouter = true;
         setTimeout(() => {

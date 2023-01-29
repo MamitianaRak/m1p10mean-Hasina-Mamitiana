@@ -32,7 +32,7 @@ export class ListeVoitureComponent implements OnInit, OnDestroy {
         if (data) {
           this.loading = false;
           this.listeVoiture = data;
-          console.log(this.listeVoiture);
+          
         }
       }
     });

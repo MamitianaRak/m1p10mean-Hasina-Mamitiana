@@ -33,7 +33,7 @@ export class DepotComponent implements OnInit {
     this.voitureService.getVoitureNoDepot(this.storageService.getUser().email).subscribe({
       next: (data: Voiture[]) => {
         this.voituresNonDepot = data;
-        console.log(this.voituresNonDepot);
+        
       }
     });
 
@@ -51,14 +51,14 @@ export class DepotComponent implements OnInit {
 
   ajoutSignalement(): void {
     this.listeSingnalement.push(this.inputValue);
-    console.log(this.immatriculation);
+    
   }
 
   depotVoiture(): void {
     if (this.immatriculation != "") {
       this.voitureService.depotVoiture(this.immatriculation, this.listeSingnalement).subscribe({
         next: data => {
-          console.log(data);
+          
           this.message = "Votre voiture a été déposé";
           this.listeSingnalement = [];
           for (let i = 0; i < this.voituresNonDepot.length; i++) {

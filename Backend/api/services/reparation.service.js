@@ -161,7 +161,7 @@ exports.getListVoituresReparer = (req,keyword) => {
 
 
 exports.getListVoituresReparerDetails = (req) => {
-    console.log("tonag");
+    
     return db.voiture.aggregate([
         { $unwind: "$reparation" },
         {$match: { 
