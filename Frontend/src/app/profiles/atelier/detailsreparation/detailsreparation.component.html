@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="d-sm-flex align-items-center justify-content-center">
-        <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
-            <span class="sr-only text-center ">Loading...</span>
-        </div>
-    </div>
     <div class="col-md-10 offset-md-1 form-1-box wow fadeInUp">
+        <div class="d-sm-flex align-items-center justify-content-center">
+            <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="isLoading" >
+                <span class="sr-only text-center ">Loading...</span>
+            </div>
+        </div>
         <div *ngIf="voiture" class="card shadow mb-4">
             <div class="card-header py-3">
                 <h4 class="m-0 font-weight-bold text-primary text-center">Suivis de la réparation de la voiture avec l'
@@ -29,6 +29,10 @@
                         <hr>
                         <h4>Avancement total de la réparation : <strong
                                 class="text-info">{{voiture.reparation!.avancement}} %</strong></h4>
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Date d'entrée dépot : <strong
+                                class="text-info">{{voiture.depots!.dateDepot  | date:'dd-MM-yyyy HH:mm'}}</strong></h4>
                     </div>
                     <div class="col-md-12">
                         <h4>Date Entrée:
@@ -111,6 +115,9 @@
                                     <div *ngIf="control[i]" class="col-md-12 text-center">
                                         <p class="text-danger">Veillez selectionner une date!!!</p>
                                     </div>
+                                    <div *ngIf="control1[i]" class="col-md-12 text-center">
+                                        <p class="text-danger">Date d' entrée dépot inferieure à la date!!!</p>
+                                    </div>
                                 </div>
                                 <div *ngIf="composant.dateDebut != null && composant.dateFin == null" class="col-md-12 " #elseBlock>
                                     <div class="form-inline  justify-content-center">
@@ -137,6 +144,9 @@
                 </div>
 
             </div>
+            <div class="card-footer text-center py-3">
+                <button [routerLink]="['/reparation']" type="button" name="" id="" class="btn btn-primary">Retour</button>
+          </div>
         </div>
     </div>
 </div>

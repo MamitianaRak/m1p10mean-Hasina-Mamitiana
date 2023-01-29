@@ -22,6 +22,7 @@ ng generate component profiles/client/facture
 ng generate component profiles/client/historique
 ng generate component profiles/client/listeVoiture
 ng generate component profiles/client/voiture
+ng generate component profiles/client/etatPaiement
 ### Atelier profile:
 ng generate component profiles/atelier ng generate module profiles/atelier --routing
 ng generate component profiles/atelier/bonSortie

@@ -18,7 +18,20 @@ exports.getListVoituresReparation = (keyword) => {
 
 exports.getVoitureReparation = (imm) => {
     return db.voiture.aggregate([
-        { $unwind: "$reparation" },
+        { $unwind: {
+            path: "$reparation",
+            includeArrayIndex: "idx"
+        }},
+        {
+            $project: {
+                _id: 0,
+                reparation: 1,
+                client:1,
+                immatriculation:1,
+                marque:1,
+                depots: { $arrayElemAt: ["$depots", "$idx"] },
+            }
+        },
         {$match: { 
             "depots.validation" : 2,"reparation.avancement" : { $ne: 100} , "reparation.dateSortie" : null,"immatriculation": imm
             }
@@ -68,8 +81,7 @@ exports.updateDateFinrep = (req,res) => {
              res.status(500).send(err);
           }else{
              //res.json("composant mis à jour");
-             serviceMail.sendEmailReparation(req,res);
-
+            serviceMail.sendEmailReparation(req,res);
           }
         });
 
@@ -212,4 +224,26 @@ exports.getListVoituresReparerDetails = (req) => {
 //      },
 //     { $sort : { "reparationt.dateSortie" : -1  } },
 //      { $project: {depots: 0, "reparation.composants": 0} }
+// ]);
+
+
+// db.voitures.aggregate([
+//     { $unwind: {
+//         path: "$reparation",
+//         includeArrayIndex: "idx"
+//     }},
+//     {
+//         $project: {
+//             _id: 0,
+//             reparation: 1,
+//             client:1,
+//             immatriculation:1,
+//             marque:1,
+//             depots: { $arrayElemAt: ["$depots", "$idx"] },
+//         }
+//     },
+//     {$match: { 
+//         "depots.validation" : 2,"reparation.avancement" : { $ne: 100} , "reparation.dateSortie" : null,"immatriculation": '2021TAA'
+//         }
+//      }
 // ]);

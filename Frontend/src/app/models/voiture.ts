@@ -31,6 +31,12 @@ export interface Voiture {
 export interface Reparation {
     immatriculation: string,
     marque: string,
+    depots?:{
+        dateDepot: Date,
+        dateSortie: Date,
+        signalements: [],
+        validation: number
+    },
     reparation?: {
         dateEntree: Date | null,
         dateSortie: Date | null,

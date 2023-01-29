@@ -82,10 +82,10 @@
                         <h5 class="text-primary">Sortie : {{reparation.dateSortie | date:' d MMMM y'}}</h5>
                     </div>
                     <div class="col-md-3">
-                        <h5 class="text-primary">Main d'ouvre: Ar {{reparation.prixMo}}</h5>
+                        <h5 class="text-primary">Main d'ouvre: Ar {{reparation.prixMo | number}}</h5>
                     </div>
                     <div class="col-md-3">
-                        <h5 class="text-primary">Prix Total: Ar {{reparation.prixTotal}}</h5>
+                        <h5 class="text-primary">Prix Total: Ar {{reparation.prixTotal | number}}</h5>
                     </div>
                 </div>
                 <table class="table" *ngFor="let composant of reparation.composants">
@@ -98,14 +98,14 @@
                     <tbody>
                         <tr *ngFor="let piece of composant.pieces">
                             <td>{{piece.nom}}</td>
-                            <td>Ar {{piece.prix}}</td>
+                            <td>Ar {{piece.prix | number}}</td>
                         </tr>
                     </tbody>
                 </table>
             </ng-container>
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="text-primary">Total des réparations: Ar {{somme}}</h5>
+                    <h5 class="text-primary">Total des réparations: Ar {{somme | number}}</h5>
                 </div>
             </div>
         </div>

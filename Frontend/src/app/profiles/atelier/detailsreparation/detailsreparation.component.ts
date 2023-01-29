@@ -15,6 +15,7 @@ export class DetailsreparationComponent implements OnInit {
   dateTemp! : Array<Date>;
   dateTempf! : Array<Date>;
   control!: Array<boolean>;
+  control1!: Array<boolean>;
   controlf!: Array<boolean>;
   controlf1!: Array<boolean>;
 
@@ -35,6 +36,7 @@ export class DetailsreparationComponent implements OnInit {
           this.dateTemp =new Array(this.voiture!.reparation!.composants!.length).fill(null);
           this.dateTempf =new Array(this.voiture!.reparation!.composants!.length).fill(null);
           this.control =new Array(this.voiture!.reparation!.composants!.length).fill(false);
+          this.control1 =new Array(this.voiture!.reparation!.composants!.length).fill(false);
           this.controlf =new Array(this.voiture!.reparation!.composants!.length).fill(false);
           this.controlf1 =new Array(this.voiture!.reparation!.composants!.length).fill(false);
         };
@@ -49,6 +51,7 @@ export class DetailsreparationComponent implements OnInit {
   changed(eventDate: any,index:any) : void {
     this.dateTemp[index] =  new Date(eventDate.target.value);
     this.control[index] = false;
+    this.control1[index] = false;
   }
 
   changedf(eventDate: any,index:any) : void {
@@ -59,9 +62,15 @@ export class DetailsreparationComponent implements OnInit {
   }
 
   updateDateDebut(index:any) {
-    this.voiture.reparation!.composants![index].dateDebut = this.dateTemp[index];
+    if(this.dateTemp[index] != null && this.dateTemp[index]< new Date(this.voiture.depots!.dateDepot)){
+      this.control1[index] = true;
+    }
+    else{
+      this.voiture.reparation!.composants![index].dateDebut = this.dateTemp[index];
+    }
     if(this.dateTemp[index] == null) this.control[index] = true;
-    if(!this.control[index] ){
+    if(!this.control[index] && !this.control1[index] ){
+      console.log("gg be");
       let dataupdate = {};
       if(this.calculavancement()==0){
         this.voiture.reparation!.dateEntree = this.voiture.reparation!.composants![index].dateDebut;
@@ -80,7 +89,7 @@ export class DetailsreparationComponent implements OnInit {
   }
 
   updateDateFin(index:any) {
-    if(this.dateTempf[index]<new Date(this.voiture.reparation!.composants![index].dateDebut!)){this.controlf1[index] = true;}
+    if(this.dateTempf[index] != null && this.dateTempf[index]<new Date(this.voiture.reparation!.composants![index].dateDebut!)){this.controlf1[index] = true;}
     else{
       this.voiture.reparation!.composants![index].dateFin = this.dateTempf[index];
     }

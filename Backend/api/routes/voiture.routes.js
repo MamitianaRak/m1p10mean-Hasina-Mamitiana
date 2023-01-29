@@ -6,6 +6,15 @@ const express = require("express");
 
 const router = express.Router();
 
+router.use(function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin",
+      "Origin, Content-Type, Accept"
+    );
+    next();
+  });
+
 router.post("/creation", controller.creationVoiture);
 router.post("/depot", controller.depotVoiture);
 router.post("/findDepot", controller.findDepotVoiture);

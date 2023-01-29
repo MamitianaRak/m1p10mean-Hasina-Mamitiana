@@ -3,7 +3,12 @@
         <h6 class="m-0 font-weight-bold text-primary">Liste des voitures à diagnostiquer</h6>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="d-sm-flex align-items-center justify-content-center">
+            <div style="width: 3rem; height: 3rem;" class="  spinner-border text-info" role="status" *ngIf="loading" >
+                <span class="sr-only text-center ">Loading...</span>
+            </div>
+        </div>
+        <div *ngIf="!loading" class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -13,12 +18,8 @@
                         <th class="text-center">Signalements</th>
                         <th class="text-center"></th>
                     </tr>
-                </thead>
-
-                <div class="spinner-border text-info mr-2 text-center" role="status" *ngIf="loading">
-                </div>
-                
-                <ng-container *ngIf="!loading">
+                </thead>               
+                <ng-container>
                     <tbody *ngFor="let i of listeVoiture; index as index">
                         <tr>
                             <td class="text-center">{{i.immatriculation}}</td>

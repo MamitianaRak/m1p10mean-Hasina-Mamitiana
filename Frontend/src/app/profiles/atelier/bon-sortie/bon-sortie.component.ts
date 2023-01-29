@@ -12,7 +12,7 @@ export class BonSortieComponent implements OnInit {
   voitures!:ReparationPage;
   keyword:string="";
   currentPage:number=1;
-  pageSize:number=2;
+  pageSize:number=8;
   pages!:Array<number>;
   ajouter = false;
 
@@ -35,6 +35,8 @@ export class BonSortieComponent implements OnInit {
           if(search){
             this.isSearch = true;
           }
+        }else{
+          this.isNodata =false;
         }
         this.isLoading=false;
         this.voitures=data;
@@ -52,6 +54,7 @@ export class BonSortieComponent implements OnInit {
     }
   
   onSearch(data:any) {
+    this.isNodata =false;
     this.isLoading=true;
   this.keyword=data.keyword;
   console.log(this.keyword,this.currentPage,this.pageSize);

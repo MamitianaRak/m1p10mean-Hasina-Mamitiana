@@ -51,13 +51,13 @@ export class StatistiqueComponent implements OnInit {
             
             //minutes 
             let minutes = Math.floor(seconds/60); 
-            seconds -= minutes*60; 
+            seconds -= minutes*60;
     return [
         months + " mois",
         days + " jours",
         hours + " heures",
         minutes + ' minutes',
-        seconds + ' secondes'
+        Math.round(seconds*100)/100 + ' secondes'
     ].join(", ");
   }
   else{

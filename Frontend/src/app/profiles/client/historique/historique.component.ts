@@ -13,7 +13,7 @@ export class HistoriqueComponent {
   reparations!:ReparationPage;
   keyword!:string;
   currentPage:number=1;
-  pageSize:number=2;
+  pageSize:number=8;
   pages!:Array<number>;
   ajouter = false;
   imm!:string;
@@ -40,6 +40,9 @@ Ongetreparation(search:boolean){
             this.isSearch = true;
           }
         }
+        else{
+          this.isNodata =false;
+        }
         this.isLoading=false;
         this.reparations=data;
         if(data != null) {this.pages=new Array<number>(data.totalPages)}; 
@@ -56,6 +59,9 @@ Ongetreparation(search:boolean){
           if(search){
             this.isSearch = true;
           }
+        }
+        else{
+          this.isNodata =false;
         }
         this.isLoading=false;
         this.reparations=data;
@@ -76,6 +82,7 @@ onPageReparations(i:number) {
  }
 
 onSearch(data:any) {
+  this.isNodata =false;
   this.isLoading=true
 this.keyword=data.keyword;
 console.log(this.keyword,this.currentPage,this.pageSize);

@@ -15,7 +15,7 @@ export class PayementComponent implements OnInit {
    keyword:string="";
    keyword1:string="";
    currentPage:number=1;
-   pageSize:number=2;
+   pageSize:number=8;
    pages!:Array<number>;
    ajouter = false;
 
@@ -40,6 +40,9 @@ OngetnonPayer(search:boolean){
           this.isSearch = true;
         }
       }
+      else{
+        this.isNodata =false;
+      }
       this.isLoading=false;
       this.voitures=data;
       if(data != null) this.pages=new Array<number>(data.totalPages);
@@ -56,6 +59,7 @@ OngetnonPayer(search:boolean){
     }
 
   onSearch(data:any) {
+  this.isNodata =false;
   this.isLoading=true;
   this.keyword=data.keyword;
   this.keyword1=data.keyword1;

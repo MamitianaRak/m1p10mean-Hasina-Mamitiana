@@ -14,7 +14,7 @@ export class ReparationComponent implements OnInit {
   voitures!:ReparationPage;
    keyword:string="";
    currentPage:number=1;
-   pageSize:number=2;
+   pageSize:number=8;
    pages!:Array<number>;
    ajouter = false;
 
@@ -38,6 +38,9 @@ Ongetvoiture(search:boolean){
           this.isSearch = true;
         }
       }
+      else{
+        this.isNodata =false;
+      }
       this.isLoading=false;
       this.voitures=data;
       if(data != null) {this.pages=new Array<number>(data.totalPages)}; 
@@ -54,6 +57,7 @@ onPageVoitures(i:number) {
   }
 
 onSearch(data:any) {
+  this.isNodata =false;
   this.isLoading=true;
 this.keyword=data.keyword;
 console.log(this.keyword,this.currentPage,this.pageSize);
