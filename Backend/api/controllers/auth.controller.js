@@ -22,6 +22,7 @@ exports.signup = (req, res) => {
   });
 
     user.save( async(err, user) => {
+      try {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -32,6 +33,9 @@ exports.signup = (req, res) => {
       token
     );
     res.send({ message: "l\'utilisateur a été enregistré!" });
+      }catch(error){
+        res.status(500).send({ message: error });
+      }
   });
 };
 
