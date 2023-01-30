@@ -16,7 +16,8 @@ app.use(
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
     httpOnly: true,
-    sameSite:'None'
+    sameSite:'None',
+    secure: false
   })
 );
 
