@@ -15,9 +15,10 @@ app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
-    httpOnly: true,
+    domain: 'garage-eight.vercel.app',
     sameSite:'None',
-    secure: true
+    secure: true,
+    httpOnly: true
   })
 );
 
