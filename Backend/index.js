@@ -11,12 +11,10 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('trust proxy', 1);
 app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
-    sameSite:'none',
     httpOnly: true,
     secureProxy:true
   })
