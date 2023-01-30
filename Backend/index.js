@@ -15,9 +15,10 @@ app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
-    sameSite:'lax',
+    sameSite:'none',
     httpOnly: true,
-    secure:true
+    secure:true,
+    secureProxy:true
   })
 );
 
