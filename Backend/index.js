@@ -15,8 +15,8 @@ app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
-    secure: true,
-    httpOnly: true
+    httpOnly: true,
+    expires: new Date('2020-12-01')
   })
 );
 
