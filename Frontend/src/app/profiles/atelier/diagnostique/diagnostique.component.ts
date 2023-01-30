@@ -24,6 +24,7 @@ export class DiagnostiqueComponent implements OnInit {
   messageErreur?: String;
   messageSuccess?: String;
   loading: boolean = true;
+  voiture?: Voiture;
 
   constructor(private voitureService: VoitureService) { }
 
@@ -65,7 +66,7 @@ export class DiagnostiqueComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      
+
       this.getComposant(event.container.data[0]);
       this.messageErreur = "";
     }
@@ -126,7 +127,7 @@ export class DiagnostiqueComponent implements OnInit {
           if (this.composantDiagnostique[i].pieces.length > 0) {
             for (let j = 0; j < this.composantDiagnostique[i].pieces.length; j++) {
               if (this.composantDiagnostique[i].pieces[j].nom === pieceAdd.nom) {
-                
+
                 this.composantDiagnostique[i].pieces.splice(j, 1);
                 if (this.composantDiagnostique[i].pieces == undefined) {
                   this.composantDiagnostique.splice(i, 1);
@@ -152,9 +153,14 @@ export class DiagnostiqueComponent implements OnInit {
         }
       }
       if (count == 0) {
-        this.voitureService.diagnostique(this.immatriculation, this.composantDiagnostique).subscribe({
+        for (let i = 0; i < this.listeVoiture.length; i++) {
+          if (this.listeVoiture[i].immatriculation == this.immatriculation) {
+            this.voiture = this.listeVoiture[i];
+          }
+        }
+        this.voitureService.diagnostique(this.immatriculation, this.voiture!.marque, this.voiture!.client.nom, this.voiture!.client.prenom, this.voiture!.client.email, this.composantDiagnostique).subscribe({
           next: (data: Voiture) => {
-            
+
             this.immatriculation = "";
             this.messageSuccess = "Diagnostique validé.";
           }

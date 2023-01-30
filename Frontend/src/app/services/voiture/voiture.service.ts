@@ -49,9 +49,13 @@ export class VoitureService {
     return this.http.get<Voiture[]>(GlobalConstants.apiURL + "/atelier/diagnostique/liste");
   }
 
-  public diagnostique(immatriculation: String, listeComposant: Composant[]): Observable<Voiture> {
+  public diagnostique(immatriculation: String, marque:String, nom: String, prenom: String, email: String, listeComposant: Composant[]): Observable<Voiture> {
     let prixMo = 2500 * listeComposant.length;
     let data = {
+      marque:marque,
+      nom: nom,
+      prenom: prenom,
+      email: email,
       immatriculation: immatriculation,
       composant: listeComposant,
       prixMo: prixMo

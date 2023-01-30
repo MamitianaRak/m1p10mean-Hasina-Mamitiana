@@ -74,7 +74,7 @@ exports.updateDateFinrep = (req,res) => {
     if(req.body.dateSortie != null){
         db.voiture.updateOne(
             {immatriculation : req.params.imm},
-            { $set: {"reparation.$[reparation].composants.$[composant].dateFin" :req.body.dateFin,"reparation.$[reparation].avancement" :req.body.avancement,"reparation.$[reparation].dateSortie":req.body.dateSortie }},
+            { $set: {"reparation.$[reparation].composants.$[composant].dateFin" :req.body.dateFin,"reparation.$[reparation].avancement" :req.body.avancement,"reparation.$[reparation].dateSortie":req.body.dateSortie,"reparation.$[reparation].prixMo":req.body.prixMo,"reparation.$[reparation].prixTotal":req.body.prixTotal }},
             { arrayFilters: [{ 'reparation.avancement':  { "$ne": 100 }},{ 'composant.nom': req.body.nom }]}
              ,function(err,updated){
           if(err){
@@ -89,7 +89,7 @@ exports.updateDateFinrep = (req,res) => {
     else{
         db.voiture.updateOne(
             {immatriculation : req.params.imm},
-            { $set: {"reparation.$[reparation].composants.$[composant].dateFin" :req.body.dateFin,"reparation.$[reparation].avancement" :req.body.avancement }},
+            { $set: {"reparation.$[reparation].composants.$[composant].dateFin" :req.body.dateFin,"reparation.$[reparation].avancement" :req.body.avancement,"reparation.$[reparation].prixMo":req.body.prixMo,"reparation.$[reparation].prixTotal":req.body.prixTotal }},
             { arrayFilters: [{ 'reparation.avancement':  { "$ne": 100 }},{ 'composant.nom': req.body.nom }]}
              ,function(err,updated){
           if(err){

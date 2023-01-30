@@ -11,8 +11,8 @@ import { Router } from "@angular/router"
 export class LoginClientComponent {
 
   user: any = {
-    email: null,
-    password: null
+    email: "steeveblues@gmail.com",
+    password: "azerty"
   };
   errorMessage = '';
   private role = "client";
@@ -26,8 +26,7 @@ export class LoginClientComponent {
   }
 
   onSubmit(): void {
-    if (this.user.email != null && this.user.password != null) {
-      
+    if (this.user.email != "" && this.user.password != "") {
       this.isLoading = true;
       this.authService.login(this.user, this.role).subscribe({
         next: data => {

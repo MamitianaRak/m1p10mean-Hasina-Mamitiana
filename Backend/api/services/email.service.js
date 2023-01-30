@@ -8,7 +8,7 @@ const frontURL = process.env.FRONT_URL;
 
 // Create and initialize the email transport object
 const transporter = nodemailer.createTransport({
-  service:"Gmail",
+  service: "Gmail",
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_SECRET
@@ -24,8 +24,8 @@ exports.sendEmailReparation = async (req, res) => {
       subject: "Réparation de la voiture " + req.body.marque + ", imm: " + req.params.imm,
       html: `
       <div>
-        <h3>Cher <span>${ req.body.user.nom } ${req.body.user.prenom }</span>,</h3>
-        <p>Nous vous informons que la voiture ${ req.body.marque } avec l' immatriculation ${ req.params.imm } a été reparée</p>
+        <h3>Cher <span>${req.body.user.nom} ${req.body.user.prenom}</span>,</h3>
+        <p>Nous vous informons que la voiture ${req.body.marque} avec l' immatriculation ${req.params.imm} a été reparée</p>
         <p>
             Veillez consulter les historiques de réparation pour voir la facture de celle-ci .
         </p>
@@ -37,8 +37,8 @@ exports.sendEmailReparation = async (req, res) => {
     };
 
     //Send the email
-     await transporter.sendMail(emailData);
-     res.status(200).send({ message: "Composant mis à jour et Email envoyer" });
+    await transporter.sendMail(emailData);
+    res.status(200).send({ message: "Composant mis à jour et Email envoyer" });
 
   } catch (e) {
     console.error(e);
@@ -46,7 +46,7 @@ exports.sendEmailReparation = async (req, res) => {
   }
 }
 
-exports.sendConfirmationEmail = async(name, email, confirmationCode) => {
+exports.sendConfirmationEmail = async (name, email, confirmationCode) => {
   await transporter.sendMail({
     from: process.env.GMAIL_USER,
     to: email,
@@ -58,3 +58,32 @@ exports.sendConfirmationEmail = async(name, email, confirmationCode) => {
           </div>`,
   });
 };
+
+exports.sendEmailDiagnostique = async (req, res) => {
+  try {
+    const emailData = {
+      to: req.body.email,
+      from: process.env.GMAIL_USER,
+      subject: "Diagnostique de votre voiture " + req.body.immatriculation + " marque " + req.body.marque,
+      html: `
+      <div>
+        <h3>Cher <span>${req.body.nom} ${req.body.prenom}</span>,</h3>
+        <p>Nous vous informons que la dignostique de votre voiture est terminée.</p>
+        <p>
+            Veillez consulter votre compte pour valider les réparation à faire.
+        </p>
+        <p>
+           Merci de votre confiance.
+        </p>
+      </div>
+      `
+    };
+
+    //Send the email
+    await transporter.sendMail(emailData);
+    next();
+
+  } catch (e) {
+    console.error(e);
+  }
+}

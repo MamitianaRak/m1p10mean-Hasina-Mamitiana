@@ -38,4 +38,13 @@ export class FinanceComponent {
       }
     });
   }
+
+  scrollToTop(): void {
+    // scroll to the top of the body
+    document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
+  }
 }

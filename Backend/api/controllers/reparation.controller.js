@@ -21,9 +21,10 @@ exports.getListVoituresReparation = async (req, res) => {
 
 
 exports.getVoitureReparation = async (req, res) => {
-    try{;
+    try{
+        const tarifMo = 4000;
         const data = await service.getVoitureReparation(req.params.imm);
-        res.send(data);
+        res.send({ reparation : data, tarif: tarifMo});
         }catch(error){
         res.status(500).send({ message: error });
     }

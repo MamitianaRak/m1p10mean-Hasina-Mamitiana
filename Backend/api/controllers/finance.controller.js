@@ -36,8 +36,9 @@ exports.getStat = async (req, res) => {
     depenseAn: depan[0]?.totalDepensesAn ?? 0,
     statchi: statchi[0] ?? initial,
     statbenefice: benefice ?? initial,
-    avgReparation: avgReparation[0]?.averageTime ?? 0
+    avgReparation: avgReparation ?? 0
 
   };
   res.send(stat);
 };
+

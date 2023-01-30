@@ -190,39 +190,59 @@ exports.getchiAffMois = () => {
     );
  }
 
- exports.getAvgReparation= (imm) => {
-    return db.voiture.aggregate([
+ exports.getAvgReparation= async (imm) => {
+    const list =  await db.voiture.aggregate([
         { $unwind: "$reparation" },
         {$match: { 
             "reparation.avancement" : 100
             }
          },
          {
-            $group:
-               {
-                   _id: null,
-                   averageTime:
-                      {
-                         $avg:
-                            {
-                               $dateDiff:{
-                                startDate:"$reparation.dateEntree",
-                             endDate: "$reparation.dateSortie",
-                             unit: "second",
-                             timezone: "Europe/Moscow",
-                                  }
-                             }
-                      }
-               }
-         },
-         {
             $project:
                {
-                  _id: 0
+                _id:0,
+                  "reparation.dateEntree":1,
+                  "reparation.dateSortie":1
                }
           }
+
     ]);
-   
+
+   return calculAvgReparation(list);
 }
 
-     
+    calculAvgReparation = (list) => {
+    let val = 0;
+    list.forEach(data => {
+        val = val +calculseconds(data.reparation.dateEntree,data.reparation.dateSortie);
+    });
+    return val;
+}
+
+dateDiff_seconds = (x,y) =>{
+    return Math.abs(x.getTime() - y.getTime())/1000;
+}
+
+    dateDiffInDays = (a, b) => {
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+  }
+
+  calculseconds = (dateD,dateF) =>{
+    const diff = dateDiffInDays(dateD,dateF);
+    if(diff == 0){
+      return dateDiff_seconds(dateD,dateF);
+    }
+      const date16h = new Date(dateD.getTime());
+      date16h.setHours(16,0,0);
+      const diffD = dateDiff_seconds(dateD,date16h);
+      const date8h = new Date(dateF.getTime());
+      date8h.setHours(8,0,0);
+      const diffF = dateDiff_seconds(date8h,dateF);
+      const middle = (diff -1)*8*60*60;
+      const finalH = diffD+diffF+middle; 
+      return finalH;
+  }

@@ -49,14 +49,14 @@ exports.signin = (req, res) => {
         return;
       }
 
+      if (!user) {
+        return res.status(404).send({ message: "Utilisateur non trouvé." });
+      }
+
       if (user.status != "Active") {
         return res.status(401).send({
           message: "Compte en attente vérifier votre email!",
         });
-      }
-
-      if (!user) {
-        return res.status(404).send({ message: "Utilisateur non trouvé." });
       }
 
       var passwordIsValid = bcrypt.compareSync(

@@ -1,5 +1,4 @@
 # Projet-Mean-M1
-web application URL: https://m1p10mean-hasina-mamitiana.vercel.app
 ## Setup Back-end: Node JS
 npm init
 npm install -g nodemon  

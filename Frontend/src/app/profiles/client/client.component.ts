@@ -43,4 +43,13 @@ export class ClientComponent implements OnInit {
       }
     });
   }
+
+  scrollToTop(): void {
+    // scroll to the top of the body
+    document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
+  }
 }

@@ -27,7 +27,7 @@
                             <td class="table-danger text-center">
                                 <button class="btn" (click)="depots()">Depots</button>
                             </td>
-                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot.toString().substring(10,0)}}
+                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot| date:' d MMMM y'}}
                             </td>
                             <td class="text-center">{{signalement(i.immatriculation)}}</td>
                             <td class="text-center">0%</td>
@@ -38,7 +38,7 @@
                             <td class="table-warning text-center">
                                 <button class="btn" (click)="attente(i.immatriculation)">En attente de validation</button>
                             </td>
-                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot.toString().substring(10,0)}}
+                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot| date:' d MMMM y'}}
                             </td>
                             <td class="text-center">{{signalement(i.immatriculation)}}</td>
                             <td class="text-center">0%</td>
@@ -51,7 +51,7 @@
                                 <button class="btn"
                                     (click)="reparation(i.immatriculation)">{{etatReparation(i.immatriculation)}}</button>
                             </td>
-                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot.toString().substring(10,0)}}
+                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot| date:' d MMMM y'}}
                             </td>
                             <td class="text-center">{{signalement(i.immatriculation)}}</td>
                             <td class="text-center">{{i.reparation[i.reparation.length-1].avancement}}%</td>
@@ -64,7 +64,7 @@
                                 <button class="btn" (click)="recuperation(i.immatriculation)">En attente de
                                     récuperation</button>
                             </td>
-                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot.toString().substring(10,0)}}
+                            <td class="text-center">{{i.depots[i.depots.length-1].dateDepot| date:' d MMMM y'}}
                             </td>
                             <td class="text-center">{{signalement(i.immatriculation)}}</td>
                             <td class="text-center">{{i.reparation[i.reparation.length-1].avancement}}%</td>
@@ -86,9 +86,9 @@
             <table class="table table-striped table-bordered">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>Composant</th>
-                        <th>Pièce</th>
-                        <th>Prix de réparation (Ar)</th>
+                        <th class="text-center">Composant</th>
+                        <th class="text-center">Pièce/Entretien</th>
+                        <th class="text-center">Prix de réparation (Ar)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,7 +97,7 @@
                             <button class="btn btn-danger my-custom-width" disabled>Main d'oeuvre</button>
                         </td>
                         <td class="text-center">-</td>
-                        <td class="text-center">{{voiture.reparation[voiture.reparation.length-1].prixMo}}</td>
+                        <td class="text-center"><h6 class="text-danger">Tarifs 4000Ar/h</h6></td>
                     </tr>
                 </tbody>
                 <tbody *ngFor="let i of listeComposant">
