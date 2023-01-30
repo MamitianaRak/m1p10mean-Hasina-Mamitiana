@@ -16,6 +16,7 @@ app.use(
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
     sameSite:'none',
+    domain:'.vercel.app/',
     httpOnly: true,
     secureProxy:true
   })
