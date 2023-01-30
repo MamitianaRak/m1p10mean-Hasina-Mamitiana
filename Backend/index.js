@@ -15,10 +15,8 @@ app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
-    sameSite:'none',
     httpOnly: true,
     secureProxy:true,
-    secure:true
   })
 );
 
