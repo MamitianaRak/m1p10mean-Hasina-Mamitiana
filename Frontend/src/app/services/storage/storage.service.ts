@@ -30,6 +30,15 @@ export class StorageService {
     return {};
   }
 
+  public getJWT(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return JSON.parse(user).jwt;
+    }
+
+    return {};
+  }
+
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {

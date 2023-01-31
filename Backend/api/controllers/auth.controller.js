@@ -78,13 +78,14 @@ exports.signin = (req, res) => {
      
       var authoritie =  user.role;
 
-      req.session.token = token;
+    //  req.headers.authorization ='Bearer ' + token;
 
       res.status(200).send({
         nom: user.nom,
         prenom:user.prenom,
         email: user.email,
-        role: CryptoJS.AES.encrypt(authoritie,process.env.ROLE_SECRET).toString()
+        role: CryptoJS.AES.encrypt(authoritie,process.env.ROLE_SECRET).toString(),
+        jwt : token
       });
     });
 };

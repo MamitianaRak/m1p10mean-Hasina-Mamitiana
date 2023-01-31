@@ -4,8 +4,8 @@ require("dotenv/config");
 const User = db.user;
 
 verifyToken = (req, res, next) => {
-  let token = req.session.token;
-
+  //let token = req.session.token;
+  let token = req.headers.authorization;
   if (!token) {
     return res.status(403).send({ message: "Pas de Token fourni!" });
   }

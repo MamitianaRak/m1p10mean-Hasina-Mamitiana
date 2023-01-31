@@ -11,16 +11,16 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cookieSession({
-    name: process.env.COOKIE_NAME,
-    secret: process.env.COOKIE_SECRET,
-    domain:'vercel.app',
-    sameSite:'none',
-    httpOnly: true,
-    secureProxy:true
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: process.env.COOKIE_NAME,
+//     secret: process.env.COOKIE_SECRET,
+//     domain:'vercel.app',
+//     sameSite:'none',
+//     httpOnly: true,
+//     secureProxy:true
+//   })
+// );
 
 const db = require("./api/models");
 
