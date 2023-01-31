@@ -7,6 +7,6 @@ const router = express.Router();
 
 //router.get("/testa", [authJwt.verifyToken], controller.clienttest);
 
-router.post("/voiture", controller.getListeVoiturePage);
+router.post("/voiture",[authJwt.verifyToken], controller.getListeVoiturePage);
 
 module.exports = router;

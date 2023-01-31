@@ -15,32 +15,32 @@ router.use(function(req, res, next) {
     next();
   });
 
-router.post("/creation", controller.creationVoiture);
-router.post("/depot", controller.depotVoiture);
-router.post("/findDepot", controller.findDepotVoiture);
-router.post("/liste", controller.getListeVoiture);
-router.post("/deleteComposant", controller.deleteComposant);
-router.get("/nonPayer", controller1.getListVoituresNonpayer);
-router.post("/validationAttente", controller.validationAttente);
-router.put("/payement/:imm", controller1.payer);
+router.post("/creation",[authJwt.verifyToken], controller.creationVoiture);
+router.post("/depot",[authJwt.verifyToken], controller.depotVoiture);
+router.post("/findDepot",[authJwt.verifyToken], controller.findDepotVoiture);
+router.post("/liste",[authJwt.verifyToken], controller.getListeVoiture);
+router.post("/deleteComposant",[authJwt.verifyToken], controller.deleteComposant);
+router.get("/nonPayer",[authJwt.verifyToken], controller1.getListVoituresNonpayer);
+router.post("/validationAttente",[authJwt.verifyToken], controller.validationAttente);
+router.put("/payement/:imm",[authJwt.verifyToken], controller1.payer);
 
-router.get("/reparation", controller2.getListVoituresReparation);
+router.get("/reparation",[authJwt.verifyToken], controller2.getListVoituresReparation);
 
-router.get("/:imm/reparation", controller2.getVoitureReparation);
+router.get("/:imm/reparation",[authJwt.verifyToken], controller2.getVoitureReparation);
 
 router.put("/:imm/reparation/compDateDebut", controller2.updateDateDebutrep);
 
-router.put("/:imm/reparation/compDatefin", controller2.updateDateFinavrep);
+router.put("/:imm/reparation/compDatefin",[authJwt.verifyToken], controller2.updateDateFinavrep);
 
-router.get("/bonsortie", controller2.getListVoituresNovalBon);
+router.get("/bonsortie",[authJwt.verifyToken], controller2.getListVoituresNovalBon);
 
-router.put("/:imm/reparation/validerBon", controller2.validerBonvoiture);
+router.put("/:imm/reparation/validerBon",[authJwt.verifyToken], controller2.validerBonvoiture);
 
-router.get("/:imm/historique", controller2.getListVoituresReparer);
+router.get("/:imm/historique",[authJwt.verifyToken], controller2.getListVoituresReparer);
 
-router.get("/:imm/historique/:date", controller2.getListVoituresReparerDetails);
+router.get("/:imm/historique/:date",[authJwt.verifyToken], controller2.getListVoituresReparerDetails);
 
-router.post("/recuperation", controller.recuperationVoiture);
+router.post("/recuperation",[authJwt.verifyToken], controller.recuperationVoiture);
 
 
 

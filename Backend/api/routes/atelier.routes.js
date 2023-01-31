@@ -5,8 +5,8 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/diagnostique/liste",controller.getVoitureDiagnostique);
-router.post("/diagnostique",controller.diagnostique);
-router.get("/composant",controller.getComposant);
+router.get("/diagnostique/liste",[authJwt.verifyToken],controller.getVoitureDiagnostique);
+router.post("/diagnostique",[authJwt.verifyToken],controller.diagnostique);
+router.get("/composant",[authJwt.verifyToken],controller.getComposant);
 
 module.exports = router;

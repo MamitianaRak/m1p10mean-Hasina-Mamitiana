@@ -5,6 +5,6 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/allPieces",controller.getlistpieces);
+router.get("/allPieces",[authJwt.verifyToken],controller.getlistpieces);
 
 module.exports = router;
